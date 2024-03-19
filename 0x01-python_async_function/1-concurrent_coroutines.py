@@ -6,6 +6,7 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 
 async def wait_n(n, max_delay):
     """Perfom await n times."""
-    result = [wait_random(max_delay) for i in range(n)]
-    result = await asyncio.gather(*result)
-    return sorted(result)
+    tasks = [wait_random(max_delay) for _ in range(n)]
+    _, completed = await asyncio.wait(tasks, return_when=asyncio.ALL_COMPLETED)
+    result = [task.result() for task in _]
+    return result
