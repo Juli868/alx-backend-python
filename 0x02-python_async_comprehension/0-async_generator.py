@@ -4,7 +4,7 @@ import asyncio
 import random
 
 
-async def async_generator() -> [float, None, None]:
+async def async_generator() -> list[float]:
     """Generate and yield a number after a sleep."""
     for i in range(10):
         await asyncio.sleep(1)
